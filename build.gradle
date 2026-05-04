@@ -1,5 +1,11 @@
+import org.gradle.util.GradleVersion
+
+if (GradleVersion.current() > GradleVersion.version("8.2")) {
+	logger.warn("Warning: This project is designed for Gradle 8.x. You are using ${GradleVersion.current()}")
+}
+
 plugins {
-	id 'fabric-loom' version '1.6.+'
+	id 'fabric-loom' version '1.4.11'
 	id 'maven-publish'
 }
 
