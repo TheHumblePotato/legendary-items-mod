@@ -1,0 +1,36 @@
+# gradle
+.gradle/
+build/
+out/
+classes/
+*.jar
+
+# eclipse
+.classpath
+.project
+.settings
+.vscode/
+*.swp
+*.swo
+*~
+
+# idea
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# vscode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# macos
+*.DS_Store
+
+# minecraft
+run/
+*.mcmeta

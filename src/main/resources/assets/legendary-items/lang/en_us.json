@@ -1,0 +1,12 @@
+{
+  "item.legendary-items.fiery_dagger": "Fiery Dagger",
+  "item.legendary-items.void_sword": "Void Sword",
+  "item.legendary-items.vampire_sword": "Vampire Sword",
+  "block.legendary-items.legendary_pedestal": "Legendary Pedestal",
+  "chat.legendary-items.fire_ring_cast": "A ring of infernal flames erupts around you!",
+  "chat.legendary-items.enraged": "You become enraged!",
+  "chat.legendary-items.void_teleport": "You step through the void...",
+  "chat.legendary-items.void_stun": "The void stuns your target!",
+  "chat.legendary-items.heart_steal": "You drain the life force of nearby players!",
+  "chat.legendary-items.bite": "You prepare to bite with hunger!"
+}
