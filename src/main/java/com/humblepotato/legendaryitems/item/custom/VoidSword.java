@@ -1,6 +1,8 @@
 package com.humblepotato.legendaryitems.item.custom;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
@@ -12,8 +14,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class VoidSword extends SwordItem {
-	private static final int TELEPORT_COOLDOWN = 150; // 7.5 seconds
-	private static final int THROW_COOLDOWN = 200; // 10 seconds
+	private static final int TELEPORT_COOLDOWN = 400; // 20 seconds
+	private static final int THROW_COOLDOWN = 600; // 30 seconds
 	private static final double PULL_RANGE = 8.0;
 	private static final int STUN_DURATION = 80; // 4 seconds
 	private static final double TELEPORT_DISTANCE = 10.0;
@@ -112,8 +114,8 @@ public class VoidSword extends SwordItem {
 			player.setTicksFrozen(STUN_DURATION);
 		} else {
 			// For mobs, apply slowness
-			var slowness = new net.minecraft.entity.effect.StatusEffectInstance(
-				net.minecraft.entity.effect.StatusEffects.SLOWNESS, 
+			var slowness = new StatusEffectInstance(
+				StatusEffects.SLOWNESS, 
 				STUN_DURATION, 
 				3, 
 				false, 

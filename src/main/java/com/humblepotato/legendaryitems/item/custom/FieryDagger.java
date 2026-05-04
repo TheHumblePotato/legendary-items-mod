@@ -13,9 +13,9 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class FieryDagger extends SwordItem {
-	private static final int FIRE_RING_COOLDOWN = 300; // 15 seconds
-	private static final int ENRAGE_COOLDOWN = 200; // 10 seconds
-	private static final int ENRAGE_DURATION = 150; // 7.5 seconds
+	private static final int FIRE_RING_COOLDOWN = 600; // 30 seconds
+	private static final int ENRAGE_COOLDOWN = 800; // 40 seconds
+	private static final int ENRAGE_DURATION = 200; // 10 seconds
 	private static final double FIRE_RING_RADIUS = 4.0;
 
 	public FieryDagger(ToolMaterial toolMaterial, int attackDamage, float attackSpeed, Item.Settings settings) {
@@ -49,7 +49,7 @@ public class FieryDagger extends SwordItem {
 			boolean hasEnrage = player.hasStatusEffect(StatusEffects.HASTE);
 			if (hasEnrage) {
 				// Deal extra fire damage that goes through fire resistance
-				target.damage(target.getDamageSources().magic(), 2.0f);
+				target.damage(target.getDamageSources().magic(), 3.0f);
 			}
 		}
 		return super.postHit(stack, target, attacker);
@@ -73,12 +73,12 @@ public class FieryDagger extends SwordItem {
 		for (LivingEntity entity : world.getEntitiesByClass(LivingEntity.class, 
 			player.getBoundingBox().expand(FIRE_RING_RADIUS), 
 			e -> e != player)) {
-			entity.damage(entity.getDamageSources().magic(), 4.0f);
+			entity.damage(entity.getDamageSources().magic(), 5.0f);
 		}
 	}
 
 	private void enragePlayer(PlayerEntity player) {
 		player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, ENRAGE_DURATION, 2, false, true));
-		player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, ENRAGE_DURATION, 1, false, true));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, ENRAGE_DURATION, 2, false, true));
 	}
 }

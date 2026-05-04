@@ -3,7 +3,6 @@ package com.humblepotato.legendaryitems.item.custom;
 import java.util.Random;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,15 +11,14 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class VampireSword extends SwordItem {
-	private static final int HEART_STEAL_COOLDOWN = 250; // 12.5 seconds
-	private static final int BITE_COOLDOWN = 180; // 9 seconds
+	private static final int HEART_STEAL_COOLDOWN = 600; // 30 seconds
+	private static final int BITE_COOLDOWN = 900; // 45 seconds
 	private static final double HEART_STEAL_RANGE = 5.0;
-	private static final int BITE_DURATION = 300; // 15 seconds
+	private static final int BITE_DURATION = 200; // 10 seconds
 	private static final Random RANDOM = new Random();
 	private static final String BITE_KEY = "VampireBite";
 
@@ -52,8 +50,8 @@ public class VampireSword extends SwordItem {
 	@Override
 	public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 		if (attacker instanceof PlayerEntity player) {
-			// 15% chance to heal on hit
-			if (RANDOM.nextDouble() < 0.15) {
+			// 10% chance to heal on hit
+			if (RANDOM.nextDouble() < 0.10) {
 				if (player.getHealth() < player.getMaxHealth()) {
 					player.heal(2.0f);
 				}
@@ -62,21 +60,21 @@ public class VampireSword extends SwordItem {
 			// Check if bite is active
 			NbtCompound nbt = stack.getNbt();
 			if (nbt != null && nbt.getBoolean(BITE_KEY)) {
-				// Double damage
-				target.damage(target.getDamageSources().playerAttack(player), (float) (this.getAttackDamage() * 2));
+				// Triple damage
+				target.damage(target.getDamageSources().playerAttack(player), (float) (this.getAttackDamage() * 3));
 				
-				// Drain target max health
+				// Drain 2 max health from target
 				double targetMaxHealth = target.getMaxHealth();
 				if (target instanceof PlayerEntity targetPlayer) {
 					targetPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-						.setBaseValue(Math.max(2.0, targetMaxHealth - 2.0));
+						.setBaseValue(Math.max(2.0, targetMaxHealth - 4.0));
 				}
 				
-				// Gain max health
+				// Gain 2 max health
 				double playerMaxHealth = player.getMaxHealth();
 				player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-					.setBaseValue(playerMaxHealth + 2.0);
-				player.setHealth(Math.min(player.getHealth() + 2.0f, player.getMaxHealth()));
+					.setBaseValue(playerMaxHealth + 4.0);
+				player.setHealth(Math.min(player.getHealth() + 4.0f, player.getMaxHealth()));
 				
 				// Reset bite
 				nbt.putBoolean(BITE_KEY, false);
@@ -91,7 +89,7 @@ public class VampireSword extends SwordItem {
 		for (LivingEntity entity : world.getEntitiesByClass(LivingEntity.class, 
 			player.getBoundingBox().expand(HEART_STEAL_RANGE), 
 			e -> e != player && e instanceof PlayerEntity)) {
-			PlayEntity targetPlayer = (PlayerEntity) entity;
+			PlayerEntity targetPlayer = (PlayerEntity) entity;
 			double targetMaxHealth = targetPlayer.getMaxHealth();
 			targetPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
 				.setBaseValue(Math.max(2.0, targetMaxHealth - 2.0));
@@ -110,7 +108,6 @@ public class VampireSword extends SwordItem {
 	private void activateBite(PlayerEntity player, ItemStack stack) {
 		NbtCompound nbt = stack.getOrCreateNbt();
 		nbt.putBoolean(BITE_KEY, true);
-		nbt.putInt("BiteExpiry", player.getWorld().getServer().getTicks() + BITE_DURATION);
 	}
 
 	private void spawnHeartStealParticles(World world, double x, double y, double z) {
