@@ -22,14 +22,14 @@ public class LegendaryItems {
 	public static final VoidSword VOID_SWORD = new VoidSword(
 		ToolMaterials.NETHERITE, 
 		8, // attack damage (same as netherite)
-		-2.4f, // attack speed
+		1.6f, // attack speed
 		new Item.Settings()
 	);
 
 	public static final VampireSword VAMPIRE_SWORD = new VampireSword(
 		ToolMaterials.NETHERITE, 
 		8, // attack damage (same as netherite)
-		-2.4f, // attack speed
+		1.6f, // attack speed
 		new Item.Settings()
 	);
 
