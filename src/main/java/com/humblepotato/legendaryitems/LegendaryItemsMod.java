@@ -15,11 +15,11 @@ public class LegendaryItemsMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LEGGER.info("Initializing Legendary Items Mod...");
+		LOGGER.info("Initializing Legendary Items Mod...");
 		LegendaryItems.register();
 		LegendaryBlocks.register();
 		LegendaryBlockEntities.register();
 		LegendaryItemGroup.register();
-		LEGGER.info("Legendary Items Mod initialized successfully!");
+		LOGGER.info("Legendary Items Mod initialized successfully!");
 	}
 }
