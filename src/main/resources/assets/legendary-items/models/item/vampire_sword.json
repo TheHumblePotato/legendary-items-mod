@@ -1,6 +1,0 @@
-{
-  "parent": "item/handheld",
-  "textures": {
-    "layer0": "legendary-items:item/vampire_sword"
-  }
-}
